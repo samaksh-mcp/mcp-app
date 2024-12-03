@@ -1,0 +1,21 @@
+// Export pages
+export '/pages/authentication/login_method/login_method_widget.dart'
+    show LoginMethodWidget;
+export '/pages/authentication/o_t_pscreen/o_t_pscreen_widget.dart'
+    show OTPscreenWidget;
+export '/pages/onboarding/done_screen/done_screen_widget.dart'
+    show DoneScreenWidget;
+export '/pages/onboarding/view_q_r_page/view_q_r_page_widget.dart'
+    show ViewQRPageWidget;
+export '/pages/inside_app/home_screen/home_screen_widget.dart'
+    show HomeScreenWidget;
+export '/pages/inside_app/inside_q_r_screen/inside_q_r_screen_widget.dart'
+    show InsideQRScreenWidget;
+export '/pages/inside_app/transaction_received/transaction_received_widget.dart'
+    show TransactionReceivedWidget;
+export '/pages/inside_app/transaction_expired/transaction_expired_widget.dart'
+    show TransactionExpiredWidget;
+export '/pages/inside_app/transaction_failed/transaction_failed_widget.dart'
+    show TransactionFailedWidget;
+export '/pages/inside_app/collect_money_on_u_p_i_not_on_m_c_p/collect_money_on_u_p_i_not_on_m_c_p_widget.dart'
+    show CollectMoneyOnUPINotOnMCPWidget;
