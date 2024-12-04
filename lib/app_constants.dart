@@ -5,4 +5,5 @@ abstract class FFAppConstants {
   static const String entityID = 'YESB';
   static const String langCode = 'en';
   static const String autoFetchCode = '123458';
+  static const String nullStringValue = 'NA';
 }

@@ -319,6 +319,10 @@ class _LoginMethodWidgetState extends State<LoginMethodWidget> {
 
                           shouldSetState = true;
                           if ((_model.generatedOtp?.succeeded ?? true)) {
+                            FFAppState().otpGenerated =
+                                !(FFAppState().otpGenerated ?? true);
+                            safeSetState(() {});
+
                             context.pushNamed('OTPscreen');
 
                             if (shouldSetState) safeSetState(() {});

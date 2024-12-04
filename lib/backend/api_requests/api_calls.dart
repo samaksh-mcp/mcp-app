@@ -1,4 +1,5 @@
 import 'dart:convert';
+
 import 'package:flutter/foundation.dart';
 
 import '/flutter_flow/flutter_flow_util.dart';
@@ -80,12 +81,14 @@ class VerfyOtpCall {
     String? mobile = '',
     String? otp = '',
     String? checkSum = '',
+    String? entityID,
   }) async {
+    entityID ??= FFAppConstants.entityID;
     final baseUrl = AuthenticationGroup.getBaseUrl();
 
     final ffApiRequestBody = '''
 {
-  "entityID": "boi",
+  "entityID": "${escapeStringForJson(entityID)}",
   "checksum": "${escapeStringForJson(checkSum)}",
   "inputParam": {
     "mobile_number": "${escapeStringForJson(mobile)}",
@@ -255,6 +258,63 @@ class AccountVerifyCall {
 class TransctionsGroup {
   static String getBaseUrl() => 'https://app.misscallpay.com';
   static Map<String, String> headers = {};
+  static HistoryCall historyCall = HistoryCall();
+}
+
+class HistoryCall {
+  Future<ApiCallResponse> call({
+    String? entityID,
+    String? checksum =
+        '1df1c365d38bf3e95b9e5f2513bb827dec5abfa6482ec119b868798e76529174',
+    String? mobileNumber = '8291969602',
+    String? length = '50',
+    String? page = '0',
+    String? filter = 'Total',
+    String? searchOption = '',
+  }) async {
+    entityID ??= FFAppConstants.entityID;
+    final baseUrl = TransctionsGroup.getBaseUrl();
+
+    final ffApiRequestBody = '''
+{
+  "entityID": "${escapeStringForJson(entityID)}",
+  "checksum": "${escapeStringForJson(checksum)}",
+  "inputParam": {
+    "mobile_number": "${escapeStringForJson(mobileNumber)}",
+    "length": "${escapeStringForJson(length)}",
+    "page": "${escapeStringForJson(page)}",
+    "filter": "${escapeStringForJson(filter)}",
+    "search_option": "${escapeStringForJson(searchOption)}"
+  }
+}''';
+    return ApiManager.instance.makeApiCall(
+      callName: 'history',
+      apiUrl: '$baseUrl/mcp/app/merchant/transaction-history',
+      callType: ApiCallType.POST,
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      params: {},
+      body: ffApiRequestBody,
+      bodyType: BodyType.JSON,
+      returnBody: true,
+      encodeBodyUtf8: false,
+      decodeUtf8: false,
+      cache: false,
+      isStreamingApi: false,
+      alwaysAllowBody: false,
+    );
+  }
+
+  List<String>? transactionStatus(dynamic response) => (getJsonField(
+        response,
+        r'''$.response.transactions[*].bank_txn_status''',
+        true,
+      ) as List?)
+          ?.withoutNulls
+          .map((x) => castToType<String>(x))
+          .withoutNulls
+          .toList();
 }
 
 /// End Transctions Group Code

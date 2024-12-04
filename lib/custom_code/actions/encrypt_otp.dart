@@ -1,4 +1,5 @@
 // Automatic FlutterFlow imports
+import '/backend/schema/structs/index.dart';
 import '/flutter_flow/flutter_flow_theme.dart';
 import '/flutter_flow/flutter_flow_util.dart';
 import 'index.dart'; // Imports other custom actions
@@ -20,8 +21,20 @@ import 'package:crypto/crypto.dart';
 // and then add the boilerplate code using the green button on the right!
 
 Future<String> encryptOtp(String otp) async {
-  String publicPEM =
-      await rootBundle.loadString('assets/keys/rsa_2048_pub.pem');
+  // String publicPEM = await rootBundle.loadString('assets/rsa_2048_pub.pem');
+
+  String publicPEM = """
+-----BEGIN PUBLIC KEY-----
+MIIBIjANBgkqhkiG9w0BAQEFAAOCAQ8AMIIBCgKCAQEAtJgZPG4xY5OJhavkA9z+
+Dy4Jtof3LKjNf9vSOC56ZifosmnLLKPQsGNuGdJmdkVtJeCZk3cI9FjUxE4zeyak
+W4rS7oohyo89PrUSnnA7U/uxGAZh4k91+UUVKxoHmLO/Z63JrflU4ARRN301t/+s
+se5BHOARI+2mfadJqqjBU/XYZnzryMM3DQrUXPbYZ3ffR4Zt5sJX6X53u2T404jx
+HY94DobGhRMv97YVIvoDu7ndmfPy63/+teUX8NFN0qqKMGRs8HCxeIjd4XtHJSNm
+ACtGXt+jlTC4MTFT46KtdknLSSMXJ4PyTZ8hd6uwC9t2JzU2bJzdxBDWnQWeENTu
+swIDAQAB
+-----END PUBLIC KEY-----
+""";
+
   var publicKey = CryptoUtils.rsaPublicKeyFromPem(publicPEM);
   var cipher = PKCS1Encoding(RSAEngine());
   cipher.init(true, PublicKeyParameter<RSAPublicKey>(publicKey));

@@ -32,7 +32,9 @@ class _OTPscreenWidgetState extends State<OTPscreenWidget> {
     _model = createModel(context, () => OTPscreenModel());
 
     // On page load action.
-    SchedulerBinding.instance.addPostFrameCallback((_) async {});
+    SchedulerBinding.instance.addPostFrameCallback((_) async {
+      _model.timerController.onStartTimer();
+    });
 
     WidgetsBinding.instance.addPostFrameCallback((_) => safeSetState(() {}));
   }
@@ -66,6 +68,9 @@ class _OTPscreenWidgetState extends State<OTPscreenWidget> {
                 size: 30.0,
               ),
               onPressed: () async {
+                FFAppState().otpGenerated =
+                    !(FFAppState().otpGenerated ?? true);
+                safeSetState(() {});
                 context.safePop();
               },
             ),
@@ -214,12 +219,6 @@ class _OTPscreenWidgetState extends State<OTPscreenWidget> {
                         otp: _model.otpEncrypt,
                         checkSum: FFAppState().checksum,
                       );
-
-                      FFAppState().accessToken =
-                          '${AuthenticationGroup.verfyOtpCall.accessToken(
-                        (_model.verifyOtp?.jsonBody ?? ''),
-                      )}';
-                      safeSetState(() {});
 
                       context.goNamed(
                         'HomeScreen',
