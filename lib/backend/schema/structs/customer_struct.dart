@@ -7,7 +7,6 @@ import '/flutter_flow/flutter_flow_util.dart';
 
 class CustomerStruct extends BaseStruct {
   CustomerStruct({
-    String? id,
     String? vpaAddress,
     String? ifscCode,
     String? maskedAccnumber,
@@ -24,11 +23,9 @@ class CustomerStruct extends BaseStruct {
     String? packageStatus,
     String? extension,
     String? agentId,
-    String? agentInfo,
     String? ovdDetails,
     String? bankName,
-  })  : _id = id,
-        _vpaAddress = vpaAddress,
+  })  : _vpaAddress = vpaAddress,
         _ifscCode = ifscCode,
         _maskedAccnumber = maskedAccnumber,
         _fullName = fullName,
@@ -44,16 +41,8 @@ class CustomerStruct extends BaseStruct {
         _packageStatus = packageStatus,
         _extension = extension,
         _agentId = agentId,
-        _agentInfo = agentInfo,
         _ovdDetails = ovdDetails,
         _bankName = bankName;
-
-  // "_id" field.
-  String? _id;
-  String get id => _id ?? '';
-  set id(String? val) => _id = val;
-
-  bool hasId() => _id != null;
 
   // "vpa_address" field.
   String? _vpaAddress;
@@ -167,13 +156,6 @@ class CustomerStruct extends BaseStruct {
 
   bool hasAgentId() => _agentId != null;
 
-  // "agent_info" field.
-  String? _agentInfo;
-  String get agentInfo => _agentInfo ?? '';
-  set agentInfo(String? val) => _agentInfo = val;
-
-  bool hasAgentInfo() => _agentInfo != null;
-
   // "ovd_details" field.
   String? _ovdDetails;
   String get ovdDetails => _ovdDetails ?? '';
@@ -189,7 +171,6 @@ class CustomerStruct extends BaseStruct {
   bool hasBankName() => _bankName != null;
 
   static CustomerStruct fromMap(Map<String, dynamic> data) => CustomerStruct(
-        id: data['_id'] as String?,
         vpaAddress: data['vpa_address'] as String?,
         ifscCode: data['ifsc_code'] as String?,
         maskedAccnumber: data['MASKED_ACCNUMBER'] as String?,
@@ -206,7 +187,6 @@ class CustomerStruct extends BaseStruct {
         packageStatus: data['package_status'] as String?,
         extension: data['extension'] as String?,
         agentId: data['agent_id'] as String?,
-        agentInfo: data['agent_info'] as String?,
         ovdDetails: data['ovd_details'] as String?,
         bankName: data['bank_name'] as String?,
       );
@@ -215,7 +195,6 @@ class CustomerStruct extends BaseStruct {
       data is Map ? CustomerStruct.fromMap(data.cast<String, dynamic>()) : null;
 
   Map<String, dynamic> toMap() => {
-        '_id': _id,
         'vpa_address': _vpaAddress,
         'ifsc_code': _ifscCode,
         'MASKED_ACCNUMBER': _maskedAccnumber,
@@ -232,17 +211,12 @@ class CustomerStruct extends BaseStruct {
         'package_status': _packageStatus,
         'extension': _extension,
         'agent_id': _agentId,
-        'agent_info': _agentInfo,
         'ovd_details': _ovdDetails,
         'bank_name': _bankName,
       }.withoutNulls;
 
   @override
   Map<String, dynamic> toSerializableMap() => {
-        '_id': serializeParam(
-          _id,
-          ParamType.String,
-        ),
         'vpa_address': serializeParam(
           _vpaAddress,
           ParamType.String,
@@ -307,10 +281,6 @@ class CustomerStruct extends BaseStruct {
           _agentId,
           ParamType.String,
         ),
-        'agent_info': serializeParam(
-          _agentInfo,
-          ParamType.String,
-        ),
         'ovd_details': serializeParam(
           _ovdDetails,
           ParamType.String,
@@ -323,11 +293,6 @@ class CustomerStruct extends BaseStruct {
 
   static CustomerStruct fromSerializableMap(Map<String, dynamic> data) =>
       CustomerStruct(
-        id: deserializeParam(
-          data['_id'],
-          ParamType.String,
-          false,
-        ),
         vpaAddress: deserializeParam(
           data['vpa_address'],
           ParamType.String,
@@ -408,11 +373,6 @@ class CustomerStruct extends BaseStruct {
           ParamType.String,
           false,
         ),
-        agentInfo: deserializeParam(
-          data['agent_info'],
-          ParamType.String,
-          false,
-        ),
         ovdDetails: deserializeParam(
           data['ovd_details'],
           ParamType.String,
@@ -431,7 +391,6 @@ class CustomerStruct extends BaseStruct {
   @override
   bool operator ==(Object other) {
     return other is CustomerStruct &&
-        id == other.id &&
         vpaAddress == other.vpaAddress &&
         ifscCode == other.ifscCode &&
         maskedAccnumber == other.maskedAccnumber &&
@@ -448,14 +407,12 @@ class CustomerStruct extends BaseStruct {
         packageStatus == other.packageStatus &&
         extension == other.extension &&
         agentId == other.agentId &&
-        agentInfo == other.agentInfo &&
         ovdDetails == other.ovdDetails &&
         bankName == other.bankName;
   }
 
   @override
   int get hashCode => const ListEquality().hash([
-        id,
         vpaAddress,
         ifscCode,
         maskedAccnumber,
@@ -472,14 +429,12 @@ class CustomerStruct extends BaseStruct {
         packageStatus,
         extension,
         agentId,
-        agentInfo,
         ovdDetails,
         bankName
       ]);
 }
 
 CustomerStruct createCustomerStruct({
-  String? id,
   String? vpaAddress,
   String? ifscCode,
   String? maskedAccnumber,
@@ -496,12 +451,10 @@ CustomerStruct createCustomerStruct({
   String? packageStatus,
   String? extension,
   String? agentId,
-  String? agentInfo,
   String? ovdDetails,
   String? bankName,
 }) =>
     CustomerStruct(
-      id: id,
       vpaAddress: vpaAddress,
       ifscCode: ifscCode,
       maskedAccnumber: maskedAccnumber,
@@ -518,7 +471,6 @@ CustomerStruct createCustomerStruct({
       packageStatus: packageStatus,
       extension: extension,
       agentId: agentId,
-      agentInfo: agentInfo,
       ovdDetails: ovdDetails,
       bankName: bankName,
     );

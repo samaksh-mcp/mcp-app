@@ -7,9 +7,7 @@ import '/flutter_flow/flutter_flow_util.dart';
 class PayeeInfoStruct extends BaseStruct {
   PayeeInfoStruct({
     MerchantStruct? merchant,
-    String? id,
-  })  : _merchant = merchant,
-        _id = id;
+  }) : _merchant = merchant;
 
   // "merchant" field.
   MerchantStruct? _merchant;
@@ -22,16 +20,10 @@ class PayeeInfoStruct extends BaseStruct {
 
   bool hasMerchant() => _merchant != null;
 
-  // "_id" field.
-  String? _id;
-  String get id => _id ?? '';
-  set id(String? val) => _id = val;
-
-  bool hasId() => _id != null;
-
   static PayeeInfoStruct fromMap(Map<String, dynamic> data) => PayeeInfoStruct(
-        merchant: MerchantStruct.maybeFromMap(data['merchant']),
-        id: data['_id'] as String?,
+        merchant: data['merchant'] is MerchantStruct
+            ? data['merchant']
+            : MerchantStruct.maybeFromMap(data['merchant']),
       );
 
   static PayeeInfoStruct? maybeFromMap(dynamic data) => data is Map
@@ -40,7 +32,6 @@ class PayeeInfoStruct extends BaseStruct {
 
   Map<String, dynamic> toMap() => {
         'merchant': _merchant?.toMap(),
-        '_id': _id,
       }.withoutNulls;
 
   @override
@@ -48,10 +39,6 @@ class PayeeInfoStruct extends BaseStruct {
         'merchant': serializeParam(
           _merchant,
           ParamType.DataStruct,
-        ),
-        '_id': serializeParam(
-          _id,
-          ParamType.String,
         ),
       }.withoutNulls;
 
@@ -63,11 +50,6 @@ class PayeeInfoStruct extends BaseStruct {
           false,
           structBuilder: MerchantStruct.fromSerializableMap,
         ),
-        id: deserializeParam(
-          data['_id'],
-          ParamType.String,
-          false,
-        ),
       );
 
   @override
@@ -75,20 +57,16 @@ class PayeeInfoStruct extends BaseStruct {
 
   @override
   bool operator ==(Object other) {
-    return other is PayeeInfoStruct &&
-        merchant == other.merchant &&
-        id == other.id;
+    return other is PayeeInfoStruct && merchant == other.merchant;
   }
 
   @override
-  int get hashCode => const ListEquality().hash([merchant, id]);
+  int get hashCode => const ListEquality().hash([merchant]);
 }
 
 PayeeInfoStruct createPayeeInfoStruct({
   MerchantStruct? merchant,
-  String? id,
 }) =>
     PayeeInfoStruct(
       merchant: merchant ?? MerchantStruct(),
-      id: id,
     );

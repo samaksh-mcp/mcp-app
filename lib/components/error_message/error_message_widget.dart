@@ -55,11 +55,11 @@ class _ErrorMessageWidgetState extends State<ErrorMessageWidget> {
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
               Text(
-                'Error, please try again.',
+                'Seems, you are not onboarded. \nPlease contact MissCallPay agent.',
                 textAlign: TextAlign.center,
                 style: FlutterFlowTheme.of(context).bodyLarge.override(
                       fontFamily: FlutterFlowTheme.of(context).bodyLargeFamily,
-                      fontSize: 25.0,
+                      fontSize: 20.0,
                       letterSpacing: 0.0,
                       useGoogleFonts: GoogleFonts.asMap().containsKey(
                           FlutterFlowTheme.of(context).bodyLargeFamily),
@@ -71,7 +71,7 @@ class _ErrorMessageWidgetState extends State<ErrorMessageWidget> {
                   onPressed: () async {
                     Navigator.pop(context);
                   },
-                  text: 'Try Again',
+                  text: 'Okay',
                   options: FFButtonOptions(
                     width: 150.0,
                     height: 50.0,

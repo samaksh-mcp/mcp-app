@@ -7,9 +7,7 @@ import '/flutter_flow/flutter_flow_util.dart';
 class PayerInfoStruct extends BaseStruct {
   PayerInfoStruct({
     CustomerStruct? customer,
-    String? id,
-  })  : _customer = customer,
-        _id = id;
+  }) : _customer = customer;
 
   // "customer" field.
   CustomerStruct? _customer;
@@ -22,16 +20,10 @@ class PayerInfoStruct extends BaseStruct {
 
   bool hasCustomer() => _customer != null;
 
-  // "_id" field.
-  String? _id;
-  String get id => _id ?? '';
-  set id(String? val) => _id = val;
-
-  bool hasId() => _id != null;
-
   static PayerInfoStruct fromMap(Map<String, dynamic> data) => PayerInfoStruct(
-        customer: CustomerStruct.maybeFromMap(data['customer']),
-        id: data['_id'] as String?,
+        customer: data['customer'] is CustomerStruct
+            ? data['customer']
+            : CustomerStruct.maybeFromMap(data['customer']),
       );
 
   static PayerInfoStruct? maybeFromMap(dynamic data) => data is Map
@@ -40,7 +32,6 @@ class PayerInfoStruct extends BaseStruct {
 
   Map<String, dynamic> toMap() => {
         'customer': _customer?.toMap(),
-        '_id': _id,
       }.withoutNulls;
 
   @override
@@ -48,10 +39,6 @@ class PayerInfoStruct extends BaseStruct {
         'customer': serializeParam(
           _customer,
           ParamType.DataStruct,
-        ),
-        '_id': serializeParam(
-          _id,
-          ParamType.String,
         ),
       }.withoutNulls;
 
@@ -63,11 +50,6 @@ class PayerInfoStruct extends BaseStruct {
           false,
           structBuilder: CustomerStruct.fromSerializableMap,
         ),
-        id: deserializeParam(
-          data['_id'],
-          ParamType.String,
-          false,
-        ),
       );
 
   @override
@@ -75,20 +57,16 @@ class PayerInfoStruct extends BaseStruct {
 
   @override
   bool operator ==(Object other) {
-    return other is PayerInfoStruct &&
-        customer == other.customer &&
-        id == other.id;
+    return other is PayerInfoStruct && customer == other.customer;
   }
 
   @override
-  int get hashCode => const ListEquality().hash([customer, id]);
+  int get hashCode => const ListEquality().hash([customer]);
 }
 
 PayerInfoStruct createPayerInfoStruct({
   CustomerStruct? customer,
-  String? id,
 }) =>
     PayerInfoStruct(
       customer: customer ?? CustomerStruct(),
-      id: id,
     );

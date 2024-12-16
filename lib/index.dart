@@ -9,8 +9,6 @@ export '/pages/onboarding/view_q_r_page/view_q_r_page_widget.dart'
     show ViewQRPageWidget;
 export '/pages/inside_app/home_screen/home_screen_widget.dart'
     show HomeScreenWidget;
-export '/pages/inside_app/inside_q_r_screen/inside_q_r_screen_widget.dart'
-    show InsideQRScreenWidget;
 export '/pages/inside_app/transaction_received/transaction_received_widget.dart'
     show TransactionReceivedWidget;
 export '/pages/inside_app/transaction_expired/transaction_expired_widget.dart'
@@ -19,3 +17,19 @@ export '/pages/inside_app/transaction_failed/transaction_failed_widget.dart'
     show TransactionFailedWidget;
 export '/pages/inside_app/collect_money_on_u_p_i_not_on_m_c_p/collect_money_on_u_p_i_not_on_m_c_p_widget.dart'
     show CollectMoneyOnUPINotOnMCPWidget;
+export '/pages/inside_app/profile_page/profile_page_widget.dart'
+    show ProfilePageWidget;
+export '/pages/inside_app/settings_page/settings_page_widget.dart'
+    show SettingsPageWidget;
+export '/pages/inside_app/inside_q_r/inside_q_r_widget.dart'
+    show InsideQRWidget;
+export '/pages/authentication/policy_and_tn_c/policy_and_tn_c_widget.dart'
+    show PolicyAndTnCWidget;
+export '/pages/authentication/account_settings/account_settings_widget.dart'
+    show AccountSettingsWidget;
+export '/pages/authentication/help_and_feedback/help_and_feedback_widget.dart'
+    show HelpAndFeedbackWidget;
+export '/pages/inside_app/transaction_request/transaction_request_widget.dart'
+    show TransactionRequestWidget;
+export '/pages/inside_app/transaction_details/transaction_details_widget.dart'
+    show TransactionDetailsWidget;

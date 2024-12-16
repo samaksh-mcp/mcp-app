@@ -4,16 +4,16 @@
 import 'index.dart';
 import '/flutter_flow/flutter_flow_util.dart';
 
-class TransactionHistoryResponseStruct extends BaseStruct {
-  TransactionHistoryResponseStruct({
+class StaticQRStruct extends BaseStruct {
+  StaticQRStruct({
     String? txnId,
     String? success,
     int? status,
-    ResponseStruct? response,
+    ResponseDataStruct? responseData,
   })  : _txnId = txnId,
         _success = success,
         _status = status,
-        _response = response;
+        _responseData = responseData;
 
   // "txn_id" field.
   String? _txnId;
@@ -38,35 +38,34 @@ class TransactionHistoryResponseStruct extends BaseStruct {
 
   bool hasStatus() => _status != null;
 
-  // "response" field.
-  ResponseStruct? _response;
-  ResponseStruct get response => _response ?? ResponseStruct();
-  set response(ResponseStruct? val) => _response = val;
+  // "response_data" field.
+  ResponseDataStruct? _responseData;
+  ResponseDataStruct get responseData => _responseData ?? ResponseDataStruct();
+  set responseData(ResponseDataStruct? val) => _responseData = val;
 
-  void updateResponse(Function(ResponseStruct) updateFn) {
-    updateFn(_response ??= ResponseStruct());
+  void updateResponseData(Function(ResponseDataStruct) updateFn) {
+    updateFn(_responseData ??= ResponseDataStruct());
   }
 
-  bool hasResponse() => _response != null;
+  bool hasResponseData() => _responseData != null;
 
-  static TransactionHistoryResponseStruct fromMap(Map<String, dynamic> data) =>
-      TransactionHistoryResponseStruct(
+  static StaticQRStruct fromMap(Map<String, dynamic> data) => StaticQRStruct(
         txnId: data['txn_id'] as String?,
         success: data['success'] as String?,
         status: castToType<int>(data['status']),
-        response: ResponseStruct.maybeFromMap(data['response']),
+        responseData: data['response_data'] is ResponseDataStruct
+            ? data['response_data']
+            : ResponseDataStruct.maybeFromMap(data['response_data']),
       );
 
-  static TransactionHistoryResponseStruct? maybeFromMap(dynamic data) => data
-          is Map
-      ? TransactionHistoryResponseStruct.fromMap(data.cast<String, dynamic>())
-      : null;
+  static StaticQRStruct? maybeFromMap(dynamic data) =>
+      data is Map ? StaticQRStruct.fromMap(data.cast<String, dynamic>()) : null;
 
   Map<String, dynamic> toMap() => {
         'txn_id': _txnId,
         'success': _success,
         'status': _status,
-        'response': _response?.toMap(),
+        'response_data': _responseData?.toMap(),
       }.withoutNulls;
 
   @override
@@ -83,15 +82,14 @@ class TransactionHistoryResponseStruct extends BaseStruct {
           _status,
           ParamType.int,
         ),
-        'response': serializeParam(
-          _response,
+        'response_data': serializeParam(
+          _responseData,
           ParamType.DataStruct,
         ),
       }.withoutNulls;
 
-  static TransactionHistoryResponseStruct fromSerializableMap(
-          Map<String, dynamic> data) =>
-      TransactionHistoryResponseStruct(
+  static StaticQRStruct fromSerializableMap(Map<String, dynamic> data) =>
+      StaticQRStruct(
         txnId: deserializeParam(
           data['txn_id'],
           ParamType.String,
@@ -107,40 +105,40 @@ class TransactionHistoryResponseStruct extends BaseStruct {
           ParamType.int,
           false,
         ),
-        response: deserializeStructParam(
-          data['response'],
+        responseData: deserializeStructParam(
+          data['response_data'],
           ParamType.DataStruct,
           false,
-          structBuilder: ResponseStruct.fromSerializableMap,
+          structBuilder: ResponseDataStruct.fromSerializableMap,
         ),
       );
 
   @override
-  String toString() => 'TransactionHistoryResponseStruct(${toMap()})';
+  String toString() => 'StaticQRStruct(${toMap()})';
 
   @override
   bool operator ==(Object other) {
-    return other is TransactionHistoryResponseStruct &&
+    return other is StaticQRStruct &&
         txnId == other.txnId &&
         success == other.success &&
         status == other.status &&
-        response == other.response;
+        responseData == other.responseData;
   }
 
   @override
   int get hashCode =>
-      const ListEquality().hash([txnId, success, status, response]);
+      const ListEquality().hash([txnId, success, status, responseData]);
 }
 
-TransactionHistoryResponseStruct createTransactionHistoryResponseStruct({
+StaticQRStruct createStaticQRStruct({
   String? txnId,
   String? success,
   int? status,
-  ResponseStruct? response,
+  ResponseDataStruct? responseData,
 }) =>
-    TransactionHistoryResponseStruct(
+    StaticQRStruct(
       txnId: txnId,
       success: success,
       status: status,
-      response: response ?? ResponseStruct(),
+      responseData: responseData ?? ResponseDataStruct(),
     );

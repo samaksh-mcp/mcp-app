@@ -12,7 +12,7 @@ const _kPrivateApiFunctionName = 'ffPrivateApiCall';
 /// Start Authentication Group Code
 
 class AuthenticationGroup {
-  static String getBaseUrl() => 'https://app.misscallpay.com';
+  static String getBaseUrl() => 'https://app1.misscallpay.com';
   static Map<String, String> headers = {};
   static GenerateOtpCall generateOtpCall = GenerateOtpCall();
   static VerfyOtpCall verfyOtpCall = VerfyOtpCall();
@@ -38,7 +38,8 @@ class GenerateOtpCall {
   "inputParam": {
     "mobile_number": "${escapeStringForJson(mobileNum)}",
     "lang_code": "${escapeStringForJson(langCode)}",
-    "auto_fetch_code": "${escapeStringForJson(autoFetchCode)}"
+    "auto_fetch_code": "${escapeStringForJson(autoFetchCode)}",
+    "loggedin_status": 1
   }
 }''';
     return ApiManager.instance.makeApiCall(
@@ -82,6 +83,7 @@ class VerfyOtpCall {
     String? otp = '',
     String? checkSum = '',
     String? entityID,
+    String? pushToken = '',
   }) async {
     entityID ??= FFAppConstants.entityID;
     final baseUrl = AuthenticationGroup.getBaseUrl();
@@ -92,7 +94,8 @@ class VerfyOtpCall {
   "checksum": "${escapeStringForJson(checkSum)}",
   "inputParam": {
     "mobile_number": "${escapeStringForJson(mobile)}",
-    "otp": "${escapeStringForJson(otp)}"
+    "otp": "${escapeStringForJson(otp)}",
+    "push_token": "${escapeStringForJson(pushToken)}"
   }
 }''';
     return ApiManager.instance.makeApiCall(
@@ -139,7 +142,7 @@ class VerfyOtpCall {
 /// Start Registration Group Code
 
 class RegistrationGroup {
-  static String getBaseUrl() => 'https://app.misscallpay.com';
+  static String getBaseUrl() => 'https://app1.misscallpay.com';
   static Map<String, String> headers = {};
   static ValidatePincodeCall validatePincodeCall = ValidatePincodeCall();
   static MerchantRegistrationCall merchantRegistrationCall =
@@ -256,7 +259,7 @@ class AccountVerifyCall {
 /// Start Transctions Group Code
 
 class TransctionsGroup {
-  static String getBaseUrl() => 'https://app.misscallpay.com';
+  static String getBaseUrl() => 'https://app1.misscallpay.com';
   static Map<String, String> headers = {};
   static HistoryCall historyCall = HistoryCall();
 }
@@ -267,10 +270,11 @@ class HistoryCall {
     String? checksum =
         '1df1c365d38bf3e95b9e5f2513bb827dec5abfa6482ec119b868798e76529174',
     String? mobileNumber = '8291969602',
-    String? length = '50',
-    String? page = '0',
+    int? length,
+    int? page,
     String? filter = 'Total',
     String? searchOption = '',
+    String? txnStatus = 'Success',
   }) async {
     entityID ??= FFAppConstants.entityID;
     final baseUrl = TransctionsGroup.getBaseUrl();
@@ -281,10 +285,11 @@ class HistoryCall {
   "checksum": "${escapeStringForJson(checksum)}",
   "inputParam": {
     "mobile_number": "${escapeStringForJson(mobileNumber)}",
-    "length": "${escapeStringForJson(length)}",
-    "page": "${escapeStringForJson(page)}",
+    "length": "$length",
+    "page": "$page",
     "filter": "${escapeStringForJson(filter)}",
-    "search_option": "${escapeStringForJson(searchOption)}"
+    "search_option": "${escapeStringForJson(searchOption)}",
+    "txn_status": "${escapeStringForJson(txnStatus)}"
   }
 }''';
     return ApiManager.instance.makeApiCall(
@@ -318,6 +323,262 @@ class HistoryCall {
 }
 
 /// End Transctions Group Code
+
+/// Start QR Geneartion Group Code
+
+class QRGeneartionGroup {
+  static String getBaseUrl() => 'https://app1.misscallpay.com';
+  static Map<String, String> headers = {};
+  static StaticQRCall staticQRCall = StaticQRCall();
+}
+
+class StaticQRCall {
+  Future<ApiCallResponse> call({
+    String? checksum = '',
+    String? mobileNumber = '',
+    String? entityId,
+  }) async {
+    entityId ??= FFAppConstants.entityID;
+    final baseUrl = QRGeneartionGroup.getBaseUrl();
+
+    final ffApiRequestBody = '''
+{
+  "entityId": "${escapeStringForJson(entityId)}",
+  "checksum": "${escapeStringForJson(checksum)}",
+  "inputParam": {
+    "mobile_number": "${escapeStringForJson(mobileNumber)}"
+  }
+}''';
+    return ApiManager.instance.makeApiCall(
+      callName: 'staticQR',
+      apiUrl: '$baseUrl/mcp/app/qr-code',
+      callType: ApiCallType.POST,
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      params: {},
+      body: ffApiRequestBody,
+      bodyType: BodyType.JSON,
+      returnBody: true,
+      encodeBodyUtf8: false,
+      decodeUtf8: false,
+      cache: false,
+      isStreamingApi: false,
+      alwaysAllowBody: false,
+    );
+  }
+}
+
+/// End QR Geneartion Group Code
+
+/// Start Collect Money Group Code
+
+class CollectMoneyGroup {
+  static String getBaseUrl() => 'https://app1.misscallpay.com';
+  static Map<String, String> headers = {};
+  static CollectMoneyCall collectMoneyCall = CollectMoneyCall();
+}
+
+class CollectMoneyCall {
+  Future<ApiCallResponse> call({
+    String? entityId,
+    String? checksum = '',
+    String? mobileNumber = '',
+    String? payerMobile = '',
+    String? amount = '1',
+    String? remarks = 'for this customer',
+    String? invoiceNumber = '12345ftgste',
+    String? channel = 'app',
+    String? ifscCode = 'KKBK',
+    int? click2call = 1,
+    String? language = 'en',
+    String? customerName = '',
+  }) async {
+    entityId ??= FFAppConstants.entityID;
+    final baseUrl = CollectMoneyGroup.getBaseUrl();
+
+    final ffApiRequestBody = '''
+{
+  "entityID": "18241",
+  "checksum": "${escapeStringForJson(checksum)}",
+  "inputParam": {
+    "mobile_number": "${escapeStringForJson(mobileNumber)}",
+    "payer_mobile": "${escapeStringForJson(payerMobile)}",
+    "txn_amount": "${escapeStringForJson(amount)}",
+    "remarks": "${escapeStringForJson(remarks)}",
+    "invoice_no": "${escapeStringForJson(invoiceNumber)}",
+    "txn_channel": "${escapeStringForJson(channel)}",
+    "bank_ifsc_code": "${escapeStringForJson(ifscCode)}",
+    "click_2_call": $click2call,
+    "lang_selection": "${escapeStringForJson(language)}",
+    "customer_name": "${escapeStringForJson(customerName)}"
+  }
+}''';
+    return ApiManager.instance.makeApiCall(
+      callName: 'Collect Money',
+      apiUrl: '$baseUrl/mcp/app/transaction/collect-money',
+      callType: ApiCallType.POST,
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      params: {},
+      body: ffApiRequestBody,
+      bodyType: BodyType.JSON,
+      returnBody: true,
+      encodeBodyUtf8: false,
+      decodeUtf8: false,
+      cache: false,
+      isStreamingApi: false,
+      alwaysAllowBody: false,
+    );
+  }
+}
+
+/// End Collect Money Group Code
+
+/// Start Info Group Code
+
+class InfoGroup {
+  static String getBaseUrl() => 'https://app1.misscallpay.com';
+  static Map<String, String> headers = {};
+  static BankDetailsCall bankDetailsCall = BankDetailsCall();
+}
+
+class BankDetailsCall {
+  Future<ApiCallResponse> call() async {
+    final baseUrl = InfoGroup.getBaseUrl();
+
+    return ApiManager.instance.makeApiCall(
+      callName: 'bank Details',
+      apiUrl: '$baseUrl/mcp/app/merchant/bank-list',
+      callType: ApiCallType.GET,
+      headers: {},
+      params: {},
+      returnBody: true,
+      encodeBodyUtf8: false,
+      decodeUtf8: false,
+      cache: false,
+      isStreamingApi: false,
+      alwaysAllowBody: false,
+    );
+  }
+}
+
+/// End Info Group Code
+
+/// Start Verify Group Code
+
+class VerifyGroup {
+  static String getBaseUrl() => 'https://app1.misscallpay.com';
+  static Map<String, String> headers = {};
+  static VerifyCustomerCall verifyCustomerCall = VerifyCustomerCall();
+  static ConsentCall consentCall = ConsentCall();
+}
+
+class VerifyCustomerCall {
+  Future<ApiCallResponse> call({
+    String? merchantNumber = '',
+    String? payerMobile = '',
+    String? checksum = '',
+    String? entityId = 'YESB',
+  }) async {
+    final baseUrl = VerifyGroup.getBaseUrl();
+
+    final ffApiRequestBody = '''
+{
+  "entityID": "YESB",
+  "checksum": "${escapeStringForJson(checksum)}",
+  "inputParam": {
+    "mobile_number": "${escapeStringForJson(merchantNumber)}",
+    "payer_mobile": "${escapeStringForJson(payerMobile)}"
+  }
+}''';
+    return ApiManager.instance.makeApiCall(
+      callName: 'verify customer',
+      apiUrl: '$baseUrl/mcp/app/customer/verify',
+      callType: ApiCallType.POST,
+      headers: {},
+      params: {},
+      body: ffApiRequestBody,
+      bodyType: BodyType.JSON,
+      returnBody: true,
+      encodeBodyUtf8: false,
+      decodeUtf8: false,
+      cache: false,
+      isStreamingApi: false,
+      alwaysAllowBody: false,
+    );
+  }
+}
+
+class ConsentCall {
+  Future<ApiCallResponse> call({
+    String? merchantMobile = '',
+    String? customerMobile = '',
+    String? consentName = 'terms_and_conditions',
+  }) async {
+    final baseUrl = VerifyGroup.getBaseUrl();
+
+    final ffApiRequestBody = '''
+{
+  "mobile_number": "${escapeStringForJson(merchantMobile)}",
+  "consent_name": "${escapeStringForJson(consentName)}",
+  "customer_mobile_number": "${escapeStringForJson(customerMobile)}"
+}''';
+    return ApiManager.instance.makeApiCall(
+      callName: 'consent',
+      apiUrl: '$baseUrl/mcp/app/merchant/get-consent',
+      callType: ApiCallType.POST,
+      headers: {},
+      params: {},
+      body: ffApiRequestBody,
+      bodyType: BodyType.JSON,
+      returnBody: true,
+      encodeBodyUtf8: false,
+      decodeUtf8: false,
+      cache: false,
+      isStreamingApi: false,
+      alwaysAllowBody: false,
+    );
+  }
+}
+
+/// End Verify Group Code
+
+class MerchantInfoCall {
+  static Future<ApiCallResponse> call({
+    String? entityID = 'boi',
+    String? checksum =
+        '20456cae2480929243a2141df1c346abf898d2f2aa6606d214e0ad54e350623f',
+    String? mobile = '9860603677',
+  }) async {
+    final ffApiRequestBody = '''
+{
+  "entityID": "${escapeStringForJson(entityID)}",
+  "checksum": "${escapeStringForJson(checksum)}",
+  "inputParam": {
+    "mobile_number": "${escapeStringForJson(mobile)}"
+  }
+}''';
+    return ApiManager.instance.makeApiCall(
+      callName: 'MerchantInfo',
+      apiUrl: 'https://app1.misscallpay.com/mcp/app/merchant/verify',
+      callType: ApiCallType.POST,
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      params: {},
+      body: ffApiRequestBody,
+      bodyType: BodyType.JSON,
+      returnBody: true,
+      encodeBodyUtf8: false,
+      decodeUtf8: false,
+      cache: false,
+      isStreamingApi: false,
+      alwaysAllowBody: false,
+    );
+  }
+}
 
 class ApiPagingParams {
   int nextPageNumber = 0;

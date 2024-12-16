@@ -1,8 +1,8 @@
 import '/flutter_flow/flutter_flow_util.dart';
-import 'inside_q_r_screen_widget.dart' show InsideQRScreenWidget;
+import 'empty_list_item_widget.dart' show EmptyListItemWidget;
 import 'package:flutter/material.dart';
 
-class InsideQRScreenModel extends FlutterFlowModel<InsideQRScreenWidget> {
+class EmptyListItemModel extends FlutterFlowModel<EmptyListItemWidget> {
   @override
   void initState(BuildContext context) {}
 

@@ -7,7 +7,6 @@ import '/flutter_flow/flutter_flow_util.dart';
 
 class MerchantStruct extends BaseStruct {
   MerchantStruct({
-    String? id,
     String? vpaAddress,
     String? ifscCode,
     String? maskedAccnumber,
@@ -19,8 +18,7 @@ class MerchantStruct extends BaseStruct {
     String? extension,
     String? merchantRefInfo,
     String? bankName,
-  })  : _id = id,
-        _vpaAddress = vpaAddress,
+  })  : _vpaAddress = vpaAddress,
         _ifscCode = ifscCode,
         _maskedAccnumber = maskedAccnumber,
         _fullName = fullName,
@@ -31,13 +29,6 @@ class MerchantStruct extends BaseStruct {
         _extension = extension,
         _merchantRefInfo = merchantRefInfo,
         _bankName = bankName;
-
-  // "_id" field.
-  String? _id;
-  String get id => _id ?? '';
-  set id(String? val) => _id = val;
-
-  bool hasId() => _id != null;
 
   // "vpa_address" field.
   String? _vpaAddress;
@@ -117,7 +108,6 @@ class MerchantStruct extends BaseStruct {
   bool hasBankName() => _bankName != null;
 
   static MerchantStruct fromMap(Map<String, dynamic> data) => MerchantStruct(
-        id: data['_id'] as String?,
         vpaAddress: data['vpa_address'] as String?,
         ifscCode: data['ifsc_code'] as String?,
         maskedAccnumber: data['MASKED_ACCNUMBER'] as String?,
@@ -135,7 +125,6 @@ class MerchantStruct extends BaseStruct {
       data is Map ? MerchantStruct.fromMap(data.cast<String, dynamic>()) : null;
 
   Map<String, dynamic> toMap() => {
-        '_id': _id,
         'vpa_address': _vpaAddress,
         'ifsc_code': _ifscCode,
         'MASKED_ACCNUMBER': _maskedAccnumber,
@@ -151,10 +140,6 @@ class MerchantStruct extends BaseStruct {
 
   @override
   Map<String, dynamic> toSerializableMap() => {
-        '_id': serializeParam(
-          _id,
-          ParamType.String,
-        ),
         'vpa_address': serializeParam(
           _vpaAddress,
           ParamType.String,
@@ -203,11 +188,6 @@ class MerchantStruct extends BaseStruct {
 
   static MerchantStruct fromSerializableMap(Map<String, dynamic> data) =>
       MerchantStruct(
-        id: deserializeParam(
-          data['_id'],
-          ParamType.String,
-          false,
-        ),
         vpaAddress: deserializeParam(
           data['vpa_address'],
           ParamType.String,
@@ -271,7 +251,6 @@ class MerchantStruct extends BaseStruct {
   @override
   bool operator ==(Object other) {
     return other is MerchantStruct &&
-        id == other.id &&
         vpaAddress == other.vpaAddress &&
         ifscCode == other.ifscCode &&
         maskedAccnumber == other.maskedAccnumber &&
@@ -287,7 +266,6 @@ class MerchantStruct extends BaseStruct {
 
   @override
   int get hashCode => const ListEquality().hash([
-        id,
         vpaAddress,
         ifscCode,
         maskedAccnumber,
@@ -303,7 +281,6 @@ class MerchantStruct extends BaseStruct {
 }
 
 MerchantStruct createMerchantStruct({
-  String? id,
   String? vpaAddress,
   String? ifscCode,
   String? maskedAccnumber,
@@ -317,7 +294,6 @@ MerchantStruct createMerchantStruct({
   String? bankName,
 }) =>
     MerchantStruct(
-      id: id,
       vpaAddress: vpaAddress,
       ifscCode: ifscCode,
       maskedAccnumber: maskedAccnumber,

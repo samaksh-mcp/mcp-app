@@ -73,14 +73,14 @@ GoRouter createRouter(AppStateNotifier appStateNotifier) => GoRouter(
       debugLogDiagnostics: true,
       refreshListenable: appStateNotifier,
       errorBuilder: (context, state) =>
-          appStateNotifier.loggedIn ? const HomeScreenWidget() : const HomeScreenWidget(),
+          appStateNotifier.loggedIn ? const HomeScreenWidget() : const LoginMethodWidget(),
       routes: [
         FFRoute(
           name: '_initialize',
           path: '/',
           builder: (context, _) => appStateNotifier.loggedIn
               ? const HomeScreenWidget()
-              : const HomeScreenWidget(),
+              : const LoginMethodWidget(),
         ),
         FFRoute(
           name: 'LoginMethod',
@@ -90,7 +90,12 @@ GoRouter createRouter(AppStateNotifier appStateNotifier) => GoRouter(
         FFRoute(
           name: 'OTPscreen',
           path: '/oTPscreen',
-          builder: (context, params) => const OTPscreenWidget(),
+          builder: (context, params) => OTPscreenWidget(
+            checksum: params.getParam(
+              'checksum',
+              ParamType.String,
+            ),
+          ),
         ),
         FFRoute(
           name: 'DoneScreen',
@@ -108,29 +113,121 @@ GoRouter createRouter(AppStateNotifier appStateNotifier) => GoRouter(
           builder: (context, params) => const HomeScreenWidget(),
         ),
         FFRoute(
-          name: 'InsideQRScreen',
-          path: '/insideQRScreen',
-          builder: (context, params) => const InsideQRScreenWidget(),
-        ),
-        FFRoute(
           name: 'TransactionReceived',
           path: '/transactionReceived',
-          builder: (context, params) => const TransactionReceivedWidget(),
+          builder: (context, params) => TransactionReceivedWidget(
+            txn: params.getParam(
+              'txn',
+              ParamType.JSON,
+            ),
+          ),
         ),
         FFRoute(
           name: 'TransactionExpired',
           path: '/transactionExpired',
-          builder: (context, params) => const TransactionExpiredWidget(),
+          builder: (context, params) => TransactionExpiredWidget(
+            txn: params.getParam(
+              'txn',
+              ParamType.JSON,
+            ),
+          ),
         ),
         FFRoute(
           name: 'TransactionFailed',
           path: '/transactionFailed',
-          builder: (context, params) => const TransactionFailedWidget(),
+          builder: (context, params) => TransactionFailedWidget(
+            txn: params.getParam(
+              'txn',
+              ParamType.JSON,
+            ),
+          ),
         ),
         FFRoute(
           name: 'CollectMoneyOnUPINotOnMCP',
           path: '/collectMoneyOnUPINotOnMCP',
           builder: (context, params) => const CollectMoneyOnUPINotOnMCPWidget(),
+        ),
+        FFRoute(
+          name: 'ProfilePage',
+          path: '/profilePage',
+          builder: (context, params) => const ProfilePageWidget(),
+        ),
+        FFRoute(
+          name: 'SettingsPage',
+          path: '/settingsPage',
+          builder: (context, params) => const SettingsPageWidget(),
+        ),
+        FFRoute(
+          name: 'InsideQR',
+          path: '/insideQR',
+          builder: (context, params) => const InsideQRWidget(),
+        ),
+        FFRoute(
+          name: 'PolicyAndTnC',
+          path: '/policyAndTnC',
+          builder: (context, params) => const PolicyAndTnCWidget(),
+        ),
+        FFRoute(
+          name: 'AccountSettings',
+          path: '/accountSettings',
+          builder: (context, params) => const AccountSettingsWidget(),
+        ),
+        FFRoute(
+          name: 'HelpAndFeedback',
+          path: '/helpAndFeedback',
+          builder: (context, params) => const HelpAndFeedbackWidget(),
+        ),
+        FFRoute(
+          name: 'TransactionRequest',
+          path: '/transactionRequest',
+          builder: (context, params) => TransactionRequestWidget(
+            txn: params.getParam(
+              'txn',
+              ParamType.JSON,
+            ),
+            name: params.getParam(
+              'name',
+              ParamType.String,
+            ),
+            amount: params.getParam(
+              'amount',
+              ParamType.String,
+            ),
+            initiatedOn: params.getParam(
+              'initiatedOn',
+              ParamType.DateTime,
+            ),
+            bankingName: params.getParam(
+              'bankingName',
+              ParamType.String,
+            ),
+            upiMobileNumber: params.getParam(
+              'upiMobileNumber',
+              ParamType.String,
+            ),
+            invoiceBillNumber: params.getParam(
+              'invoiceBillNumber',
+              ParamType.String,
+            ),
+            bankName: params.getParam(
+              'bankName',
+              ParamType.String,
+            ),
+            ifscCode: params.getParam(
+              'ifscCode',
+              ParamType.String,
+            ),
+          ),
+        ),
+        FFRoute(
+          name: 'TransactionDetails',
+          path: '/transactionDetails',
+          builder: (context, params) => TransactionDetailsWidget(
+            txn: params.getParam(
+              'txn',
+              ParamType.JSON,
+            ),
+          ),
         )
       ].map((r) => r.toRoute(appStateNotifier)).toList(),
     );
@@ -301,7 +398,7 @@ class FFRoute {
 
           if (requireAuth && !appStateNotifier.loggedIn) {
             appStateNotifier.setRedirectLocationIfUnset(state.uri.toString());
-            return '/homeScreen';
+            return '/loginMethod';
           }
           return null;
         },

@@ -12,13 +12,15 @@ String otpInputParamString(
   String mobile,
   String language,
   String autoFetch,
+  int loggedinstatus,
 ) {
   /// MODIFY CODE ONLY BELOW THIS LINE
 
   var inputParam = jsonEncode({
     "mobile_number": mobile, //variable
     "lang_code": language,
-    "auto_fetch_code": autoFetch // for what? //variable rakhna hai
+    "auto_fetch_code": autoFetch, // for what? //variable rakhna hai
+    "loggedin_status": loggedinstatus
   });
   return inputParam;
 

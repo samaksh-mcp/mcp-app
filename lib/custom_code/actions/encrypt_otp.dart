@@ -23,17 +23,15 @@ import 'package:crypto/crypto.dart';
 Future<String> encryptOtp(String otp) async {
   // String publicPEM = await rootBundle.loadString('assets/rsa_2048_pub.pem');
 
-  String publicPEM = """
------BEGIN PUBLIC KEY-----
-MIIBIjANBgkqhkiG9w0BAQEFAAOCAQ8AMIIBCgKCAQEAtJgZPG4xY5OJhavkA9z+
-Dy4Jtof3LKjNf9vSOC56ZifosmnLLKPQsGNuGdJmdkVtJeCZk3cI9FjUxE4zeyak
-W4rS7oohyo89PrUSnnA7U/uxGAZh4k91+UUVKxoHmLO/Z63JrflU4ARRN301t/+s
-se5BHOARI+2mfadJqqjBU/XYZnzryMM3DQrUXPbYZ3ffR4Zt5sJX6X53u2T404jx
-HY94DobGhRMv97YVIvoDu7ndmfPy63/+teUX8NFN0qqKMGRs8HCxeIjd4XtHJSNm
-ACtGXt+jlTC4MTFT46KtdknLSSMXJ4PyTZ8hd6uwC9t2JzU2bJzdxBDWnQWeENTu
-swIDAQAB
------END PUBLIC KEY-----
-""";
+  String publicPEM = """-----BEGIN PUBLIC KEY-----
+MIIBIjANBgkqhkiG9w0BAQEFAAOCAQ8AMIIBCgKCAQEAqzUao5r4DuDGTveywQO6
+ryoWd8vkD6SyoD6S6l6xLGK/kuvIm2sFkeDUvsUHs5aXJQHR/gVRjV9cwJ7xxqg9
+0jAzc4sSjfcHak++ENyW77d65IM7IQE29lVsPb1SZ6aKT9XckjLnem+5eJ8NNINM
+//FXJyiVvQxeJxhbWL/ZoVz41Ik4C1jALLaW04cI2s+fUCWja+7OA5vM+tYtNMHe
+wnbQYa+8G4dvm7z1XJE3h4QLFaNwh52DH2gcrS/ckhxBbV+d2ybEppNFsNVLqUqP
+C/JQNCiyXjz8qh6N8lcSGXdK/+RHcreBOszJiLbM+Zj4SRm6fpNyPwgJOFAXPpmW
+gwIDAQAB
+-----END PUBLIC KEY-----""";
 
   var publicKey = CryptoUtils.rsaPublicKeyFromPem(publicPEM);
   var cipher = PKCS1Encoding(RSAEngine());

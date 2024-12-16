@@ -4,8 +4,8 @@
 import 'index.dart';
 import '/flutter_flow/flutter_flow_util.dart';
 
-class TransactionsStruct extends BaseStruct {
-  TransactionsStruct({
+class TxnStruct extends BaseStruct {
+  TxnStruct({
     String? txnType,
     PayerInfoStruct? payerInfo,
     PayeeInfoStruct? payeeInfo,
@@ -19,6 +19,7 @@ class TransactionsStruct extends BaseStruct {
     String? completedAt,
     String? initiatedAt,
     String? didNumber,
+    String? mcpTxnId,
   })  : _txnType = txnType,
         _payerInfo = payerInfo,
         _payeeInfo = payeeInfo,
@@ -31,7 +32,8 @@ class TransactionsStruct extends BaseStruct {
         _bankRrn = bankRrn,
         _completedAt = completedAt,
         _initiatedAt = initiatedAt,
-        _didNumber = didNumber;
+        _didNumber = didNumber,
+        _mcpTxnId = mcpTxnId;
 
   // "txn_type" field.
   String? _txnType;
@@ -132,11 +134,21 @@ class TransactionsStruct extends BaseStruct {
 
   bool hasDidNumber() => _didNumber != null;
 
-  static TransactionsStruct fromMap(Map<String, dynamic> data) =>
-      TransactionsStruct(
+  // "mcp_txn_id" field.
+  String? _mcpTxnId;
+  String get mcpTxnId => _mcpTxnId ?? '';
+  set mcpTxnId(String? val) => _mcpTxnId = val;
+
+  bool hasMcpTxnId() => _mcpTxnId != null;
+
+  static TxnStruct fromMap(Map<String, dynamic> data) => TxnStruct(
         txnType: data['txn_type'] as String?,
-        payerInfo: PayerInfoStruct.maybeFromMap(data['payer_info']),
-        payeeInfo: PayeeInfoStruct.maybeFromMap(data['payee_info']),
+        payerInfo: data['payer_info'] is PayerInfoStruct
+            ? data['payer_info']
+            : PayerInfoStruct.maybeFromMap(data['payer_info']),
+        payeeInfo: data['payee_info'] is PayeeInfoStruct
+            ? data['payee_info']
+            : PayeeInfoStruct.maybeFromMap(data['payee_info']),
         bankTxnRefId: data['bank_txn_ref_id'] as String?,
         txnAmount: data['txn_amount'] as String?,
         txnRequest: data['txn_request'] as String?,
@@ -147,11 +159,11 @@ class TransactionsStruct extends BaseStruct {
         completedAt: data['completed_at'] as String?,
         initiatedAt: data['initiated_at'] as String?,
         didNumber: data['did_number'] as String?,
+        mcpTxnId: data['mcp_txn_id'] as String?,
       );
 
-  static TransactionsStruct? maybeFromMap(dynamic data) => data is Map
-      ? TransactionsStruct.fromMap(data.cast<String, dynamic>())
-      : null;
+  static TxnStruct? maybeFromMap(dynamic data) =>
+      data is Map ? TxnStruct.fromMap(data.cast<String, dynamic>()) : null;
 
   Map<String, dynamic> toMap() => {
         'txn_type': _txnType,
@@ -167,6 +179,7 @@ class TransactionsStruct extends BaseStruct {
         'completed_at': _completedAt,
         'initiated_at': _initiatedAt,
         'did_number': _didNumber,
+        'mcp_txn_id': _mcpTxnId,
       }.withoutNulls;
 
   @override
@@ -223,10 +236,13 @@ class TransactionsStruct extends BaseStruct {
           _didNumber,
           ParamType.String,
         ),
+        'mcp_txn_id': serializeParam(
+          _mcpTxnId,
+          ParamType.String,
+        ),
       }.withoutNulls;
 
-  static TransactionsStruct fromSerializableMap(Map<String, dynamic> data) =>
-      TransactionsStruct(
+  static TxnStruct fromSerializableMap(Map<String, dynamic> data) => TxnStruct(
         txnType: deserializeParam(
           data['txn_type'],
           ParamType.String,
@@ -294,14 +310,19 @@ class TransactionsStruct extends BaseStruct {
           ParamType.String,
           false,
         ),
+        mcpTxnId: deserializeParam(
+          data['mcp_txn_id'],
+          ParamType.String,
+          false,
+        ),
       );
 
   @override
-  String toString() => 'TransactionsStruct(${toMap()})';
+  String toString() => 'TxnStruct(${toMap()})';
 
   @override
   bool operator ==(Object other) {
-    return other is TransactionsStruct &&
+    return other is TxnStruct &&
         txnType == other.txnType &&
         payerInfo == other.payerInfo &&
         payeeInfo == other.payeeInfo &&
@@ -314,7 +335,8 @@ class TransactionsStruct extends BaseStruct {
         bankRrn == other.bankRrn &&
         completedAt == other.completedAt &&
         initiatedAt == other.initiatedAt &&
-        didNumber == other.didNumber;
+        didNumber == other.didNumber &&
+        mcpTxnId == other.mcpTxnId;
   }
 
   @override
@@ -331,11 +353,12 @@ class TransactionsStruct extends BaseStruct {
         bankRrn,
         completedAt,
         initiatedAt,
-        didNumber
+        didNumber,
+        mcpTxnId
       ]);
 }
 
-TransactionsStruct createTransactionsStruct({
+TxnStruct createTxnStruct({
   String? txnType,
   PayerInfoStruct? payerInfo,
   PayeeInfoStruct? payeeInfo,
@@ -349,8 +372,9 @@ TransactionsStruct createTransactionsStruct({
   String? completedAt,
   String? initiatedAt,
   String? didNumber,
+  String? mcpTxnId,
 }) =>
-    TransactionsStruct(
+    TxnStruct(
       txnType: txnType,
       payerInfo: payerInfo ?? PayerInfoStruct(),
       payeeInfo: payeeInfo ?? PayeeInfoStruct(),
@@ -364,4 +388,5 @@ TransactionsStruct createTransactionsStruct({
       completedAt: completedAt,
       initiatedAt: initiatedAt,
       didNumber: didNumber,
+      mcpTxnId: mcpTxnId,
     );

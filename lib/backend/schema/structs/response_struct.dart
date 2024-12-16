@@ -6,124 +6,71 @@ import '/flutter_flow/flutter_flow_util.dart';
 
 class ResponseStruct extends BaseStruct {
   ResponseStruct({
-    List<TransactionsStruct>? transactions,
-    TxnSumAmountStruct? txnSumAmount,
-    int? firebaseNotificationCount,
-    BillingInfoStruct? billingInfo,
-  })  : _transactions = transactions,
-        _txnSumAmount = txnSumAmount,
-        _firebaseNotificationCount = firebaseNotificationCount,
-        _billingInfo = billingInfo;
+    int? profileStatus,
+    ProfileInfoStruct? profileInfo,
+  })  : _profileStatus = profileStatus,
+        _profileInfo = profileInfo;
 
-  // "transactions" field.
-  List<TransactionsStruct>? _transactions;
-  List<TransactionsStruct> get transactions => _transactions ?? const [];
-  set transactions(List<TransactionsStruct>? val) => _transactions = val;
+  // "profile_status" field.
+  int? _profileStatus;
+  int get profileStatus => _profileStatus ?? 0;
+  set profileStatus(int? val) => _profileStatus = val;
 
-  void updateTransactions(Function(List<TransactionsStruct>) updateFn) {
-    updateFn(_transactions ??= []);
+  void incrementProfileStatus(int amount) =>
+      profileStatus = profileStatus + amount;
+
+  bool hasProfileStatus() => _profileStatus != null;
+
+  // "profile_info" field.
+  ProfileInfoStruct? _profileInfo;
+  ProfileInfoStruct get profileInfo => _profileInfo ?? ProfileInfoStruct();
+  set profileInfo(ProfileInfoStruct? val) => _profileInfo = val;
+
+  void updateProfileInfo(Function(ProfileInfoStruct) updateFn) {
+    updateFn(_profileInfo ??= ProfileInfoStruct());
   }
 
-  bool hasTransactions() => _transactions != null;
-
-  // "txn_sum_amount" field.
-  TxnSumAmountStruct? _txnSumAmount;
-  TxnSumAmountStruct get txnSumAmount => _txnSumAmount ?? TxnSumAmountStruct();
-  set txnSumAmount(TxnSumAmountStruct? val) => _txnSumAmount = val;
-
-  void updateTxnSumAmount(Function(TxnSumAmountStruct) updateFn) {
-    updateFn(_txnSumAmount ??= TxnSumAmountStruct());
-  }
-
-  bool hasTxnSumAmount() => _txnSumAmount != null;
-
-  // "firebase_notification_count" field.
-  int? _firebaseNotificationCount;
-  int get firebaseNotificationCount => _firebaseNotificationCount ?? 0;
-  set firebaseNotificationCount(int? val) => _firebaseNotificationCount = val;
-
-  void incrementFirebaseNotificationCount(int amount) =>
-      firebaseNotificationCount = firebaseNotificationCount + amount;
-
-  bool hasFirebaseNotificationCount() => _firebaseNotificationCount != null;
-
-  // "billing_info" field.
-  BillingInfoStruct? _billingInfo;
-  BillingInfoStruct get billingInfo => _billingInfo ?? BillingInfoStruct();
-  set billingInfo(BillingInfoStruct? val) => _billingInfo = val;
-
-  void updateBillingInfo(Function(BillingInfoStruct) updateFn) {
-    updateFn(_billingInfo ??= BillingInfoStruct());
-  }
-
-  bool hasBillingInfo() => _billingInfo != null;
+  bool hasProfileInfo() => _profileInfo != null;
 
   static ResponseStruct fromMap(Map<String, dynamic> data) => ResponseStruct(
-        transactions: getStructList(
-          data['transactions'],
-          TransactionsStruct.fromMap,
-        ),
-        txnSumAmount: TxnSumAmountStruct.maybeFromMap(data['txn_sum_amount']),
-        firebaseNotificationCount:
-            castToType<int>(data['firebase_notification_count']),
-        billingInfo: BillingInfoStruct.maybeFromMap(data['billing_info']),
+        profileStatus: castToType<int>(data['profile_status']),
+        profileInfo: data['profile_info'] is ProfileInfoStruct
+            ? data['profile_info']
+            : ProfileInfoStruct.maybeFromMap(data['profile_info']),
       );
 
   static ResponseStruct? maybeFromMap(dynamic data) =>
       data is Map ? ResponseStruct.fromMap(data.cast<String, dynamic>()) : null;
 
   Map<String, dynamic> toMap() => {
-        'transactions': _transactions?.map((e) => e.toMap()).toList(),
-        'txn_sum_amount': _txnSumAmount?.toMap(),
-        'firebase_notification_count': _firebaseNotificationCount,
-        'billing_info': _billingInfo?.toMap(),
+        'profile_status': _profileStatus,
+        'profile_info': _profileInfo?.toMap(),
       }.withoutNulls;
 
   @override
   Map<String, dynamic> toSerializableMap() => {
-        'transactions': serializeParam(
-          _transactions,
-          ParamType.DataStruct,
-          isList: true,
-        ),
-        'txn_sum_amount': serializeParam(
-          _txnSumAmount,
-          ParamType.DataStruct,
-        ),
-        'firebase_notification_count': serializeParam(
-          _firebaseNotificationCount,
+        'profile_status': serializeParam(
+          _profileStatus,
           ParamType.int,
         ),
-        'billing_info': serializeParam(
-          _billingInfo,
+        'profile_info': serializeParam(
+          _profileInfo,
           ParamType.DataStruct,
         ),
       }.withoutNulls;
 
   static ResponseStruct fromSerializableMap(Map<String, dynamic> data) =>
       ResponseStruct(
-        transactions: deserializeStructParam<TransactionsStruct>(
-          data['transactions'],
-          ParamType.DataStruct,
-          true,
-          structBuilder: TransactionsStruct.fromSerializableMap,
-        ),
-        txnSumAmount: deserializeStructParam(
-          data['txn_sum_amount'],
-          ParamType.DataStruct,
-          false,
-          structBuilder: TxnSumAmountStruct.fromSerializableMap,
-        ),
-        firebaseNotificationCount: deserializeParam(
-          data['firebase_notification_count'],
+        profileStatus: deserializeParam(
+          data['profile_status'],
           ParamType.int,
           false,
         ),
-        billingInfo: deserializeStructParam(
-          data['billing_info'],
+        profileInfo: deserializeStructParam(
+          data['profile_info'],
           ParamType.DataStruct,
           false,
-          structBuilder: BillingInfoStruct.fromSerializableMap,
+          structBuilder: ProfileInfoStruct.fromSerializableMap,
         ),
       );
 
@@ -132,26 +79,20 @@ class ResponseStruct extends BaseStruct {
 
   @override
   bool operator ==(Object other) {
-    const listEquality = ListEquality();
     return other is ResponseStruct &&
-        listEquality.equals(transactions, other.transactions) &&
-        txnSumAmount == other.txnSumAmount &&
-        firebaseNotificationCount == other.firebaseNotificationCount &&
-        billingInfo == other.billingInfo;
+        profileStatus == other.profileStatus &&
+        profileInfo == other.profileInfo;
   }
 
   @override
-  int get hashCode => const ListEquality().hash(
-      [transactions, txnSumAmount, firebaseNotificationCount, billingInfo]);
+  int get hashCode => const ListEquality().hash([profileStatus, profileInfo]);
 }
 
 ResponseStruct createResponseStruct({
-  TxnSumAmountStruct? txnSumAmount,
-  int? firebaseNotificationCount,
-  BillingInfoStruct? billingInfo,
+  int? profileStatus,
+  ProfileInfoStruct? profileInfo,
 }) =>
     ResponseStruct(
-      txnSumAmount: txnSumAmount ?? TxnSumAmountStruct(),
-      firebaseNotificationCount: firebaseNotificationCount,
-      billingInfo: billingInfo ?? BillingInfoStruct(),
+      profileStatus: profileStatus,
+      profileInfo: profileInfo ?? ProfileInfoStruct(),
     );
